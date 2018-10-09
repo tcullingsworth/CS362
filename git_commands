@@ -1,0 +1,5 @@
+Get status of any changes    :  git status
+Add any changes              :  git add *
+Commit changes               :  git commit -m "Comment for changes being committed"
+Push changes to repo         :  git push
+Retrieve changes from master :  git pull
