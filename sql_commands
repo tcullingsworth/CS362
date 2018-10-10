@@ -1,0 +1,7 @@
+USE [database name];
+SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY
