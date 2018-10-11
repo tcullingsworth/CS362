@@ -7,9 +7,10 @@
 **************************************************************************************************
 * Change History
 **************************************************************************************************
-* Date:			Author:			Description:
-* ----------    ---------- 		--------------------------------------------------
-* 09/07/2018	BNigatu			initial version created
+* Date:			Author:					Description:
+* ----------    ---------- 				--------------------------------------------------
+* 09/07/2018	BNigatu					initial version created
+* 10/10/2018	Trevor Cullingsworth	In class modifications
 *************************************************************************************************
 * Usage:
 *************************************************************************************************
@@ -21,7 +22,7 @@ Execute each batch of the script sequentially
  *==============================================================================================*/
 
 
-USE CIA_FACTBOOK_DB;
+USE [trevor.cullingsworth];
 go
 
 -- SELECT without a FROM clause
@@ -30,7 +31,7 @@ SELECT 100.98 as this_number;
 
 SELECT 'Text literal needs to be between single quotes';
 
-SELECT 01/01/2010;
+SELECT '01/01/2010';
 
 
 /*==============================================================================================
@@ -110,7 +111,8 @@ SELECT IIF (0>1, 'Greater', 'Lessor') AS comparison;
 
 -- For example we would like to create a new column that shows the economic status of a country
 -- This can be done using GDP >300 billion 'Developed' else 'Developing'
-SELECT Country
+/* SELECT Country */
+SELECT Country.Name as Country_Name
       ,GDP
       ,Agriculture
       ,[Service]
@@ -123,7 +125,9 @@ SELECT Country
 			THEN 'Developing'
 			ELSE 'Under developed'
 	   END AS economic_status
-FROM dbo.Economy; 
+/* FROM dbo.Economy; */
+FROM dbo.Economy
+join dbo.Country on country.Code = Economy.Country;
 
 
  /*==============================================================================================

@@ -5,3 +5,29 @@ WHERE
 GROUP BY
 HAVING
 ORDER BY
+
+-----------------------------------------------------
+
+If you are using a column name in a table that is also the same as a SQL reserved name you will need to put your column name in brackets []
+For example Length is a reserved word if I wanted to use Length as a column name it is fine but when I query it I need to use [Length]
+SELECT [Length]
+FROM dbo.River;
+
+-----------------------------------------------------
+
+To rename the column name in the results (note: will not change the column name in the database - only in the results) use AS
+for example:
+SELECT Name AS 'Country Name'
+FROM dbo.Country;
+
+Results will be:
+Country Name
+USA
+France
+England
+etc.
+
+-----------------------------------------------------
+
+
+
