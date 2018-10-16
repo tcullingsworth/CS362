@@ -1,0 +1,69 @@
+SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+
+can use the following to compare integers:
+=     - equal
+>     - greater than
+<     - less than
+>=    - greater than or equal to
+<=    - less than or equal to
+<> != - not equal
+
+For strings use LIKE to compare
+
+can use the following for operator:
+AND
+OR
+NOT
+
+A AND B = B AND A
+
+----------------------------------
+
+In SQL for wildcars use:
+
+% (0 - infinity characters)
+
+- (0 - 1 characters)
+
+For strings use LIKE to compare
+
+WHERE Name LIKE '%Name you are searching for%';
+
+WHERE Name NOT LIKE '%Name you do not want to be in your search%';
+
+Use parenthesis to search for a group of items
+
+WHERE Name IN ('MEX','USA'); - will find all names that have 'MEX' or 'USA' as the name (no wildcard so results will be exact)
+
+For sub-queries you can use:
+SELECT
+FROM
+WHERE
+HAVING
+inside parenthesis
+
+However, you can not use ORDER BY
+
+---------------------------------
+
+
+
+
+----------------------------------
+
+/*==============================================================================================
+ * Exercise Questions
+ *==============================================================================================*/
+
+/*
+  1) Select all cities in state of 'New York'?
+  2) Find countries that have some part of their region on different continents?
+ 	   -- hint refer to Encompasses table
+  3) Display an Airport in 'USA' that has an elevation of 313?
+  4) Select Islands that has an Elevation between 3000 and 4000 feet?
+  5) Display all top 5 Lakes in the world that has the largest Area?
