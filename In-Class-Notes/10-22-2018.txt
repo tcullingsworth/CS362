@@ -1,0 +1,36 @@
+10-22-18 - Notes:
+
+SELECT FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+
+----
+
+GROUP BY - aggregate data
+ORDER BY - sort results
+HAVING - like the WHERE clause - filters results
+
+----------
+
+SELECT Province
+	,SUM(ISNULL([Population],0)) as total_population
+	,AVG(ISNULL([Population],0)) as average_population
+FROM dbo.City
+GROUP BY Province
+
+By putitng ISNULL in parenthesis it will set the Population to 0 for any city that has NULL for population
+
+-------------------
+
+COUNT does not count NULL values
+
+an aggregate can not appear in a WHERE clause
+Need to use HAVING
+
+in class demo
+
+mortality rate = (# of deaths / population size) * 1000
+
+
