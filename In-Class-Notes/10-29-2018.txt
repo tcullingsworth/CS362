@@ -1,0 +1,36 @@
+Class Notes - 10/29/18"
+
+*** Next Week - Mid Term exam - Monday
+
+Chapters 1-8
+Questions like the weekly quizzes
+30 questions
+
+Due Friday 11/2/18: Lab 2 ?
+
+---------------
+
+JOIN clauses
+
+INNER JOIN - JOIN tables without any specifics - default
+
+Primary key from main table = foreign key from another table
+
+example:
+So far we have only done:
+SELECT <this>
+FROM <table>
+
+If <this> is a country code we will just see the code and not the country name
+
+If we have another table that has the country and country code we can join that table to this main one to get the countryname based on country code
+
+SELECT *
+FROM dbo.Country
+from dbo.geo_Desert
+
+If we have many-to-many relationship we wil need to create a JOIN table
+
+Table 1 PK  \
+---------------- JOIN table with both tables PK
+Table 2 PK  /  
