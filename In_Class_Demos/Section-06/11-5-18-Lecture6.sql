@@ -38,8 +38,10 @@ go
 --			INT / VARCHAR() / CHAR()
 --			If you set CHAR to a length it will use up that length even if data is not that long
 --			Can potentially use up an amount of storage when it doesn't need to use the storage
+--			VARCHAR(MAX) - will allocate maximum space (2 GB)
 --			Other types:
 --				DATE
+--				DATE TIMES 2
 --				DATETIME - could be YY-MM-DD HH:mm ss.mmmm etc.
 --				MONEY - will put money sign - no need to enter it
 --				VARB - var binary
@@ -535,4 +537,8 @@ WHERE C.City = 'Man'
 Print (@NumYears);
 
 
+
+SELECT Col1, Col2, Col3, SUM(Col4) AS S
+FROM Table1
+GROUP BY Col1, Col2, Col3;  <<<< All columns from SELECT except the aggregate (SUM) needs to be in the group by
 		   

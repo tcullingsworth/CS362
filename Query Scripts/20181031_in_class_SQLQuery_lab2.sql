@@ -34,6 +34,7 @@ ORDER BY "Minimum GDP" ASC;
 -- 2)   Find the population growth rate for each city?
 		-- hint refer to Citypops table and https://pages.uoregon.edu/rgp/PPPM613/class8a.htm for population growth rate
 		-- Eisenstadt 58369
+		-- Extra credit
 SELECT City
        ,Year
        ,Population
@@ -46,4 +47,85 @@ SELECT City
 FROM dbo.Citypops
 WHERE City = 'Eisenstadt'
 GROUP BY City;
+
+
+
+-- 3)	Display the most widely spoken language for each country, using a subquery?
+
+SELECT C.[Name] AS 'Country Name',
+	   L1.[Name] AS 'Language Name',
+	   L1.[Percentage] AS 'Language Percentage'
+FROM dbo.LANGUAGE L1
+JOIN dbo.Country C ON C.Code = L1.Country
+WHERE L1.[Percentage] IN (SELECT MAX(L2.[Percentage]) AS [Percentage]
+						  FROM dbo.LANGUAGE L2
+						  WHERE L1.[Country] = L2.[Country]
+						  GROUP BY L2.[Country])
+ORDER BY C.[Name] ASC,
+	     L1.[Percentage] DESC;
+
+
+
+-- 4)	Display the most widely spoken language in the continent Europe?
+ 	    -- hint refer to Encompasses table
+SELECT L1.[Name] AS 'Language Name',
+	   L1.[Percentage] AS 'Language Percentage',
+	   E.[Continent]
+FROM dbo.LANGUAGE L1
+JOIN dbo.encompasses E ON E.Country = L1.Country
+JOIN dbo.Country C ON C.Code = L1.Country
+WHERE L1.[Percentage] IN (SELECT MAX(L2.[Percentage]) AS [Percentage]
+						  FROM dbo.LANGUAGE L2
+						  WHERE L1.[Country] = L2.[Country]
+						  GROUP BY L2.[Country])
+AND E.[Continent] = 'Europe'
+ORDER BY L1.[Percentage] DESC,
+		 L1.[Name] ASC;
+
+
+SELECT C.[Name] AS 'Country Name',
+	   E.[Continent] AS 'Continent',
+	   C.[Population] AS 'Total Population',
+	   L1.[Name] AS 'Language Name',
+	   L1.[Percentage] AS 'Language Percentage'
+
+SELECT L1.[Name] AS 'Language Name',
+	   C.[Population] AS 'Total Population'
+FROM dbo.Country C
+JOIN dbo.encompasses E ON E.Country = C.Code
+JOIN dbo.LANGUAGE L1 ON L1.Country = C.Code
+WHERE E.[Continent] = 'Europe'
+AND L1.[Percentage] IN (SELECT MAX(L2.[Percentage]) AS [Percentage]
+						FROM dbo.LANGUAGE L2
+						WHERE L1.[Country] = L2.[Country]
+						GROUP BY L2.[Country])
+ORDER BY L1.[Name] ASC,
+	     C.[Population] DESC;
+		 
+
+
+
+
+SELECT [Name] AS 'Country Name',
+	   [Population] AS 'Total Population',
+	   [Province] AS 'Province'
+FROM dbo.Country
+ORDER BY [Province] ASC;
+
+
+
+
+
+
+
+
+
+WHERE L1.[Percentage] IN (SELECT MAX(L2.[Percentage]) AS [Percentage]
+						  FROM dbo.LANGUAGE L2
+						  WHERE L1.[Country] = L2.[Country]
+						  GROUP BY L2.[Country])
+AND E.[Continent] = 'Europe'
+ORDER BY L1.[Percentage] DESC,
+		 L1.[Name] ASC;
+
 
