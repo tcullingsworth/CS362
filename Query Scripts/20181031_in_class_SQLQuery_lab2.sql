@@ -83,11 +83,6 @@ ORDER BY L1.[Percentage] DESC,
 		 L1.[Name] ASC;
 
 
-SELECT C.[Name] AS 'Country Name',
-	   E.[Continent] AS 'Continent',
-	   C.[Population] AS 'Total Population',
-	   L1.[Name] AS 'Language Name',
-	   L1.[Percentage] AS 'Language Percentage'
 
 SELECT L1.[Name] AS 'Language Name',
 	   C.[Population] AS 'Total Population'
@@ -100,7 +95,42 @@ AND L1.[Percentage] IN (SELECT MAX(L2.[Percentage]) AS [Percentage]
 						WHERE L1.[Country] = L2.[Country]
 						GROUP BY L2.[Country])
 ORDER BY L1.[Name] ASC,
-	     C.[Population] DESC;
+	     'Total Population' DESC;
+
+
+
+SELECT L1.[Name], MAX(L.[Percentage]) AS [Percentage]
+FROM dbo.LANGUAGE L
+JOIN dbo.Country C ON C.Code = L.Country
+GROUP BY L.[Country]
+
+
+SELECT C.[Name] AS 'Country Name',
+	   E.[Continent] AS 'Continent',
+	   C.[Population] AS 'Total Population',
+	   L1.[Name] AS 'Language Name',
+	   L1.[Percentage] AS 'Language Percentage'
+
+
+
+
+SELECT L1.[Name] AS 'Language Name',
+	   (SELECT SUM(C2.[Population]) AS [Population]
+	    FROM dbo.Country C2
+		JOIN dbo.LANGUAGE L3 ON L3.Country = C2.Code
+		WHERE L1.Country = L3.Country
+		GROUP BY L3.Country) 
+	    AS 'Total Population'
+FROM dbo.Country C1
+JOIN dbo.encompasses E ON E.Country = C1.Code
+JOIN dbo.LANGUAGE L1 ON L1.Country = C1.Code
+WHERE E.[Continent] = 'Europe'
+AND L1.[Percentage] IN (SELECT MAX(L2.[Percentage]) AS [Percentage]
+						FROM dbo.LANGUAGE L2
+						WHERE L1.[Country] = L2.[Country]
+						GROUP BY L2.[Country])
+ORDER BY L1.[Name] ASC,
+	     'Total Population' DESC;
 		 
 
 
