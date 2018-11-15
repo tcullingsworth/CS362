@@ -1,0 +1,44 @@
+11/14/18 Class notes:
+
+CREATE table
+ALTER table
+DROP table
+Temporary tables
+Create relationship
+Database delegation
+Create constraints
+Index
+
+----------------------
+
+Quiz:
+
+1) It is possible to delete primary key records from the parent relation when there is a none cascading foreign key relationship exist between another table. (True/False)	-	True
+
+
+2) All columns in a given table must have the same data types. (True/False)	-	False
+
+
+3) Assume you have created two temporary tables #Sales1 and ##Sale2. Which one of those tables can be access from a different session/query window?
+
+A. #Sales1
+B. ##Sales2   <<<<<<<<<<<<<<<<<<<<
+C. Both #Sales1 and ##Sales2
+D. None of the temp tables can be accessed from a different session/query windows
+
+
+4) Which of the following statement/s is/are true about tables?
+A. Regular tables can have indexes while temporary tables could not.
+B. Global temporary tables and regular tables access from multiple session.
+C. Tables that do not have indexes are what are known as temporary tables.
+D. In SQL Server, if one creates temporary tables in the employee database, the temp tables will be created in TempDB database.
+D. A & C
+E. B & D    <<<<<<<<<<<<<<<<<<<<<
+
+
+5) We can use _________ keyword to absolutely make sure users do not have access to a Table.
+A. REVOKE
+B. DENY     <<<<<<<<<<<<<<<<<<<<<
+C. GRANT
+D. STOP
+E. All of the above

@@ -68,6 +68,9 @@ ORDER BY C.[Name] ASC,
 
 -- 4)	Display the most widely spoken language in the continent Europe?
  	    -- hint refer to Encompasses table
+
+
+
 SELECT L1.[Name] AS 'Language Name',
 	   L1.[Percentage] AS 'Language Percentage',
 	   E.[Continent]

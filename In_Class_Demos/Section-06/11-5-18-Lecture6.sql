@@ -54,6 +54,7 @@ go
 --			pk_Student_ID is name of contraint
 --		Can only have 1 PRIMARY KEY in a table but can put more than one column as the CONSTRAINT 
 --			Look more into this
+	
 
 CREATE TABLE tblStudent(
 	StudentID	INT IDENTITY,
@@ -125,6 +126,11 @@ go
 -- We could create a temporary tables to hold data such a result of subqueries.
 -- There are two types of temporary tables #LOCAL (most commonly used) and ##GLOBAL temporary tables.
 -- Local Temporary tables are identified by "#" sign infront of the table name.
+--
+--	Temporary tables
+--		#	- local teporary table
+--		##	- global temporary table
+--	Identifiers - starts with an underscore _ or letters both lower and upper case - can not start with a number
 
 CREATE TABLE #Table1
 (
@@ -219,6 +225,8 @@ go
  *==============================================================================================*/
  -- In SQL Server Constraints help us to maintain integrity of our data by embedding 
  -- those data validation method in the declaration of our table.
+
+ -- Primary keys have to be unique and also has to be not null
 /*
  * Primary Key constraint
  * Source: http://blog.reckonedforce.com/primary-key-constraints/
