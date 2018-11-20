@@ -9,11 +9,20 @@ Database delegation
 Create constraints
 Index
 
+-------------------------
+
+11/19/18 Class notes:
+
+Server 
+|
+|----Login
+
+
 ----------------------
 
 Quiz:
 
-1) It is possible to delete primary key records from the parent relation when there is a none cascading foreign key relationship exist between another table. (True/False)	-	True
+1) It is possible to delete primary key records from the parent relation when there is a none cascading foreign key relationship exist between another table. (True/False)	-	False
 
 
 2) All columns in a given table must have the same data types. (True/False)	-	False

@@ -353,6 +353,9 @@ FROM View1;
  * Create a Login 
  */
 
+
+
+
 USE MASTER;
 GO
 
@@ -360,6 +363,9 @@ CREATE LOGIN SQLTester WITH PASSWORD=N'SuperSecure#8!',
 	   DEFAULT_DATABASE = MASTER, 
 	   DEFAULT_LANGUAGE = US_ENGLISH;
 GO
+
+-- PASSWORD=N <<< Normally password by default is varchar - by supplying the N in front of password it 
+-- tells SQL server that password is NVARCHAR (accepts unicode)
 
 ALTER LOGIN SQLTester ENABLE;
 GO
