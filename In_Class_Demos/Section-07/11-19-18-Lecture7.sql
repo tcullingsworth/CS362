@@ -16,6 +16,15 @@
 Execute each batch of the script sequentially
 *************************************************************************************************/
 
+-- JOINs
+--		- JOIN / INNER JOIN - joins on primary key
+--		- Sometimes we do not want to JOIN on a primary key
+--		- For example if we want to see countries with or without rivers:
+--			Use LEFT JOIN:  FROM Country LEFT JOIN River
+--			will display all countries even though a country might not have a river
+--			in this case the countries without rivers will show NULL where river would be
+--		- Can use an OUTER JOIN
+
 USE [trevor.cullingsworth];
 go
 /*==============================================================================================
@@ -57,7 +66,7 @@ RIGHT OUTER JOIN Country c
  * 4) FULL OUTER JOIN
  *==============================================================================================*/
 -- Full outer join All rows in all joined tables are included, whether they are matched or not. 
-SELECT ISNULL(geo_Desert.Country, geo_Mountain.Country) AS Country, 
+SELECT (SELECT Name FROM Country WHERE Code = ISNULL(geo_Desert.Country, geo_Mountain.Country)) AS Country, 
        geo_Desert.Desert, 
        geo_Mountain.Mountain
 FROM geo_Mountain 
@@ -75,6 +84,14 @@ FULL OUTER JOIN geo_Desert
 SELECT *
 FROM Desert CROSS JOIN Mountain;  -- Desert X Mountain
 
+--		Table A		Table B
+--		  1		      3
+--		  2			  4
+-- Will provide the following results:
+--		1,3
+--		1,4
+--		2,3
+--		2,4
 
 /*==============================================================================================
  * 6) Using Subqueries in FROM clause
@@ -101,7 +118,7 @@ LEFT JOIN  (SELECT Country, MAX(Mountain.Elevation) AS Highest_Elevation
 -- Example 1
 SELECT c.Name as Country_Name, 
 	   d.Desert as Desert_Name
-FROM  Country c, geo_Desert d
+FROM  Country c, geo_Desert d -- Stopping here makes this a cross join - need to use the WHERE clause
 WHERE  c.code  =  d.Country ; -- This is the same as INNER JOIN Country and Desert
 
 -- Example 2
@@ -111,6 +128,15 @@ FROM Country c
 LEFT JOIN geo_Mountain m ON c.Code = m.Country 
 WHERE m.Mountain LIKE 'A%'; -- Even if the two tables are joined with OUTER JOIN, because
 						     -- of the where clause the join is converted to INNER JOIN
+
+-- Example 2 another implementation
+SELECT c.Name as Country_Name, 
+	   m.Mountain as Mountain_Name
+FROM Country c
+LEFT JOIN geo_Mountain m ON c.Code = m.Country AND m.Mountain LIKE 'A%'; 
+-- by adding the criteria of 'A%' as part of the LEFT JOIN it will list all countries
+-- regardles if they have a mountain starting with A or not but in the case of countries 
+-- with no 'A' mountain the query displays NULL
 
 SELECT c.Name as Country_Name, 
 	   m.Mountain as Mountain_Name
@@ -203,6 +229,7 @@ go
 
 -- Let us combine contry name, its capital and total area for display purpose.
 -- This query will give an error since area is a float and can not be concatinated with other string.
+-- converting happens at run time - does not alter the table
 
 SELECT [Name] +' - '+ Capital +' - '+ Area 
 FROM Country;
@@ -226,6 +253,9 @@ SELECT GETDATE() AS [CurrentTimeStamp],
 	   CONVERT(DATE, GETDATE()) AS [ConvertToOnlyDate],
 	   CONVERT(VARCHAR(10), GETDATE(), 112) [ConvertAlsoSupportFormating-YYYYMMDD]
 
+-- the date format 112 is set in SQL to YYYYMMDD
+-- 111 format YYYY/MM/DD etc.  - can google all of the formats
+
 -- Text to INT
 SELECT '1' AS [This is Text 1],
 	   CAST('1' AS INT) AS [CAST to number 1],
@@ -243,7 +273,8 @@ SELECT 'SQL' AS [This is Text SQL],
 
 /*
   1) Find all cities that exist in the continent of Africa?
-  2) You are an analyst for Census Bureau and asked to find US cities _that are losing their population year after year, for example, Akron Ohio?
+  2) You are an analyst for Census Bureau and asked to find US cities _that are losing their population year after year, 
+     for example, Akron Ohio?
       -- hint use Citypops tables and make sure the cities are in the USA.
   3) You are working as a database consultant to one of the major political party in the next national election.
 	 Your party asked you to provide the top 3, most populated cities in the Swing States to run TV ads?
@@ -254,3 +285,15 @@ SELECT 'SQL' AS [This is Text SQL],
   5) Create a report that has the name of State and all water body sorted by State and Water body in ascending order?
 	   -- hint vertically combine [State, Lake] and [State, River]
 */
+
+-- Question 1
+SELECT C1.Name AS CityName,
+       C2.Name AS CountryName,
+	   E.Continent AS ContinentName
+FROM dbo.City C1
+JOIN dbo.Country C2 ON C1.Country = C2.Code
+JOIN dbo.encompasses E ON C2.Code = E.Country AND
+E.Continent = 'Africa' AND
+E.Percentage = 100;
+
+
