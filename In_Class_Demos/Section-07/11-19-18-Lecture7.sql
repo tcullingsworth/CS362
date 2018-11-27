@@ -279,11 +279,23 @@ SELECT 'SQL' AS [This is Text SQL],
   3) You are working as a database consultant to one of the major political party in the next national election.
 	 Your party asked you to provide the top 3, most populated cities in the Swing States to run TV ads?
 	   -- hint Use City table. Find the Swing States from https://en.wikipedia.org/wiki/Swing_state
+
+	   -- for each swing state as liste din wiki page find top 3 populated cities in those states
+
+	   -- SELECT Name
+	      FROM 
+
   4) You are working for FEMA, and due to its relations to hurricane you are requested to find rivers that have 
 	 "estuary elevation" more than 100 feet in the USA?
 	   -- hint Make sure the estuary is in the USA.
+
+	   -- SELECT Name
+	      FROM 
   5) Create a report that has the name of State and all water body sorted by State and Water body in ascending order?
 	   -- hint vertically combine [State, Lake] and [State, River]
+
+	   -- SELECT Name
+	      FROM 
 */
 
 -- Question 1

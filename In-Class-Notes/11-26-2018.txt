@@ -1,0 +1,64 @@
+11-26-18 class notes:
+
+tasks learned:
+
+SQL query:
+DELECT
+FROM
+WHERE
+etc.
+
+Also:
+CREATE table
+DROP table
+ALTER table
+
+Constraints:
+Primary
+foreign
+check
+
+
+JOINs:
+INNER JOIN
+LEFT
+RIGHT
+CROSS
+FULL OUT JOIN
+CROSS APPLY
+
+Set Operations:
+UNION
+INTERSECT
+EXCEPT
+
+-----------------
+
+Storing data:
+INSERT
+UPDATE
+DELETE
+
+INSERT values - insert values into a table
+INSERT SELECT - insert values into existing table using data from another table
+SELECT INTO   - insert values into new table using data from another table
+
+UPDATE records
+UPDATE table SET values - will update every record in the table with the values you specify
+UPDATE table SET values WHERE criteria - this will only update the record or records that match the criteria
+
+DELETE FROM table - delete all records from a table
+TRUNCATE table - will also delete all records from table
+
+DELETE FROM table WHERE criteria - will only delete records from table that match criteria
+
+use OUTPUT to record deleted or inserted data
+
+
+
+-----------------------------------------------------
+-----------------------------------------------------
+
+LAB 3 - due 11/30/18 Friday
+LAB 4 - due 12/07/18 Friday
+
