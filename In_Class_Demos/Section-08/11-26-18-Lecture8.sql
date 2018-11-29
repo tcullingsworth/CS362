@@ -235,6 +235,19 @@ WHERE Operation = 'Deleted';
 */
 
 
+/*
+Making a backup
+
+SELECT *
+FROM Test_Table WITH NOBLOCK;
+
+UNION     - union with NO duplicates
+UNION ALL - union WITH duplicates
+
+Dry Run:
+BEGIN TRANS
+ROLLBACK TRANS  - to roll back
+COMMIT          - to commit changes
 
 /*==============================================================================================
  * Exercise Database

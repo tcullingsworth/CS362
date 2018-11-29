@@ -276,6 +276,24 @@ SELECT 'SQL' AS [This is Text SQL],
   2) You are an analyst for Census Bureau and asked to find US cities _that are losing their population year after year, 
      for example, Akron Ohio?
       -- hint use Citypops tables and make sure the cities are in the USA.
+
+	  WITH CTE AS {
+	  SELECT *, ROW_NUMBER() OVER(partition by City, Province Order by [Year]) AS row_num
+	  from CityPops
+	  where Country = 'USA'
+	  }
+	  select a.City, a.Province, max(a.row_num) as max_row
+	  from cte as a
+	  join cte as b on b.city = a.city and a.province = b.province and a.row_max/1 < b.row_max and
+	  a.[population] = b.[population]
+	  group by a.City, a.Province;
+
+	  USING Row Numbers:
+	  SELECt *, row_number() over(partition by province order by population desc) AS row_num
+	  FROM City
+	  WHERE country = 'USA' AND
+	  row_num < 4;
+
   3) You are working as a database consultant to one of the major political party in the next national election.
 	 Your party asked you to provide the top 3, most populated cities in the Swing States to run TV ads?
 	   -- hint Use City table. Find the Swing States from https://en.wikipedia.org/wiki/Swing_state
