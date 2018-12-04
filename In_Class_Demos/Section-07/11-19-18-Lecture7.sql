@@ -294,6 +294,28 @@ SELECT 'SQL' AS [This is Text SQL],
 	  WHERE country = 'USA' AND
 	  row_num < 4;
 
+	  -----
+
+	  ;WITH CTE AS (
+	SELECT *, row_number() OVER(PARTITION BY City, Province ORDER BY [Year]) AS row_num
+	FROM Citypops
+	WHERE Country = 'USA'
+)
+SELECT A.City,
+	   A.Province,
+	   MAX(A.row_num) AS "Number of Years of Population Data", 
+	   COUNT(B.row_num) as "Number of Years of Decreasing Population"
+FROM CTE as A
+LEFT JOIN CTE AS B ON A.City = B.City AND
+					  A.Province = B.Province AND 
+					  A.row_num+1 = B.row_num AND
+					  A.[Population] > B.[Population]
+GROUP BY A.City,
+         A.Province
+HAVING MAX(A.row_num)-1 = COUNT(B.row_num);
+
+
+
   3) You are working as a database consultant to one of the major political party in the next national election.
 	 Your party asked you to provide the top 3, most populated cities in the Swing States to run TV ads?
 	   -- hint Use City table. Find the Swing States from https://en.wikipedia.org/wiki/Swing_state

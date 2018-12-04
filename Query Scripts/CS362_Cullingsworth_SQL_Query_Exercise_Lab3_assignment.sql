@@ -51,13 +51,15 @@ E.Percentage = 100;
 --		Query provided in class
 --		As far as I understand the query:
 --			Query does the following:
---				- Creates a temporary table to get number of years of population data per USA city
+--				- Creates a common table expression to get number of years of population data per USA city
 --				- Using this temporary table the query gets the population data from the next 
 --				  data point (one more row than current loaded data point) - in the query the current
 --				  loaded data point is A.[Population] and next data point is B.[Population]
 --			      The comparison is checking if current data point A.[Population] is greater than
 --			      next data point B.[Population] then the population decreased from data point A to 
 --			      data point B
+--				- For the results each city is listed with its data points and the population from those
+--				  data points
 --
 ;WITH CTE AS (
 	SELECT *, row_number() OVER(PARTITION BY City, Province ORDER BY [Year]) AS row_num
@@ -66,16 +68,19 @@ E.Percentage = 100;
 )
 SELECT A.City,
 	   A.Province,
-	   MAX(A.row_num) AS "Number of Years of Population Data", 
-	   COUNT(B.row_num) as "Number of Years of Decreasing Population"
+	   C.[Year], 
+	   C.Population
 FROM CTE as A
+JOIN dbo.Citypops C ON C.City = A.City 
 LEFT JOIN CTE AS B ON A.City = B.City AND
 					  A.Province = B.Province AND 
 					  A.row_num+1 = B.row_num AND
 					  A.[Population] > B.[Population]
 GROUP BY A.City,
-         A.Province
-HAVING MAX(A.row_num)-1 = COUNT(B.row_num); 
+         A.Province,
+		 C.[Year],
+		 C.Population
+HAVING MAX(A.row_num)-1 = COUNT(B.row_num);
 
 
 
@@ -95,15 +100,19 @@ HAVING MAX(A.row_num)-1 = COUNT(B.row_num);
 --					North Carolina
 --					Pennsylvania
 --					Virginia
---					Wisconsin			
+--					Wisconsin
+--				- Creates a common table expression to get a list of cities for each state and 
+--				  the population of those cities in descending order (most populous to least)
+--				- The query filters the cities to only look for cities in the USA and only from 
+--				  the swing states
+--				- The results of the query will further be filtered to only list the top 3 (if available) 
+--				  most populous cities per state		
 --
-
-SELECT Province,
-	   Name,
-       Population
-FROM dbo.City
-WHERE Country = 'USA' AND
-      Province IN ('Colorado',
+;WITH CTE AS (
+	SELECT *, row_number() OVER(PARTITION BY Province ORDER BY Population DESC) AS row_num
+	FROM dbo.City
+	WHERE Country = 'USA' AND
+	      Province IN ('Colorado',
 		           'Florida',
 				   'Iowa',
 				   'Michigan',
@@ -115,8 +124,13 @@ WHERE Country = 'USA' AND
 				   'Pennsylvania',
 				   'Virginia',
 				   'Wisconsin')
-ORDER BY Province ASC,
-		 Population DESC;
+)
+SELECT Province AS State,
+	   Name AS City,
+       Population
+FROM CTE
+WHERE row_num < 4
+ORDER BY Province ASC;
 
 
 

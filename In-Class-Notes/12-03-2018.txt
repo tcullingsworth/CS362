@@ -1,0 +1,29 @@
+
+12/3/18 class notes:
+
+DECLARE @A1 INT;
+DECLARE @A2 INT;
+
+SET @A1 = 23;
+SELECT @A2 = 2;
+
+SELECT @A1 + @A2 AS TOTAL;
+go
+
+----------------------------
+
+lab 4
+
+Bizuayehu,Nigatu,BNigatu@coloradotech.edu
+Julia,Bueno,julia.bueno@my.denver.coloradotech.edu
+Trevor,Cullingsworth,trevor.cullingsworth@my.denver.coloradotech.edu
+Scott,Herbert,s.herbert16@my.denver.coloradotech.edu
+Timothy,Hostetter,t.hostetter@my.denver.coloradotech.edu
+Troy,Kruger,t.kruger1@my.denver.coloradotech.edu
+William,Reid,w.reid6@my.denver.coloradotech.edu
+Robert,Sanders,r.sanders67@my.denver.coloradotech.edu
+Naximus,Tyrand,n.tyrand@my.denver.coloradotech.edu
+Mark,Weber,m.weber26@my.denver.coloradotech.edu
+
+
+
