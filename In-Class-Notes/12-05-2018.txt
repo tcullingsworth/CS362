@@ -1,0 +1,71 @@
+
+Review:
+
+Section 6:
+
+CREATE TABLE [table name]
+
+Column types:
+id int
+fname varchar(50)
+date / datetime
+decimal(10,2)
+money
+varbinary
+
+GO after create table code
+
+------------------
+
+ALTER TABLE [table name] - can be used to add a column
+
+ALTER TABLE [table name] - change table name using sp_rename
+
+------------------
+
+DROP TABLE [table name]
+
+---------------------
+
+local temporary table - only within query
+global temporary table - can be accessed outside query window
+
+----------------------
+
+Creating relationships
+
+CREATE FOREIGN KEY constraint
+
+ALTER TABLE [table name] ADD Constraint
+FK_ FOREIGN KEY(
+
+-----------------------
+
+create virtual tables or VIEWs
+
+
+CREATE VIEW StudentVW AS
+SELECT *
+FROM table A
+JOIN table b on b.foo = a.foo;
+GO
+
+SELECT *
+FROM StudentVW;
+
+----------------------------
+
+GRANT / REVOKE / DENY database permissions
+
+----------------------------
+
+Lab 4 exercise questions:
+
+no need to do questions 2 and 3 but will do them anyways
+
+-----------------------------
+
+
+
+
+
