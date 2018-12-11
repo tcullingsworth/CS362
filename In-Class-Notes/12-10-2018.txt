@@ -1,0 +1,61 @@
+final 
+
+31 questions - some are bonus questions
+
+any subject after midterm
+how do you join?
+create / 
+
+
+queries in exam
+
+given a table design - for example:
+
+Student: 
+StudentID
+FirstName
+LastName
+
+Course:
+CourseID
+CourseNumber
+CourseName
+
+Create a table from the exam requirements
+
+example:
+
+select *
+from course c
+join student_course as sc on c.id = sc.courseid
+join student as s on s.id = sc.studentid;
+
+union etc. operations
+
+--------------------------
+
+creating reports
+
+see lecture 6
+
+excel:
+data
+from other sources
+from sql server
+choose database
+
+create view
+use sql server ip
+windows authentication
+
+create view viewname
+as
+sql query
+go
+
+select *
+from
+
+https://support.office.com/en-us/article/create-a-timeline-9c4448a9-99c7-4b0e-8eff-0dcf535f223c#ID0EAABAAA=Office_2010
+
+
